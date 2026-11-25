@@ -30,29 +30,3 @@ CREATE TABLE course_materials (
     uploaded_by UUID NOT NULL,
     uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
-
--- טבלת מטלות
-CREATE TABLE assignments (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    course_id UUID REFERENCES courses(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    instructions TEXT NOT NULL,
-    rubric_url TEXT,
-    due_date TIMESTAMP WITH TIME ZONE NOT NULL,
-    max_score INTEGER DEFAULT 100,
-    allowed_file_types TEXT[], -- מערך סיומות מותרות
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- טבלת הגשות סטודנטים
-CREATE TABLE submissions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    assignment_id UUID REFERENCES assignments(id) ON DELETE CASCADE,
-    student_id UUID NOT NULL,
-    file_url TEXT NOT NULL,
-    student_notes TEXT,
-    submitted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    status VARCHAR(20) DEFAULT 'submitted',
-    grade NUMERIC(5,2),
-    ai_feedback_id UUID
-);
