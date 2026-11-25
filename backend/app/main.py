@@ -18,3 +18,6 @@ def health_check():
 from app.modules.ai_assistant.router import router as ai_router
 app.include_router(ai_router)
 
+from app.modules.analytics_notifications.router import router as analytics_notifications_router
+app.include_router(analytics_notifications_router)
+
