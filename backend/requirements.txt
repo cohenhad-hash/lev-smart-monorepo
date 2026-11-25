@@ -1,2 +1,5 @@
 fastapi
 uvicorn[standard]
+supabase
+pwdlib[argon2]
+email-validator
