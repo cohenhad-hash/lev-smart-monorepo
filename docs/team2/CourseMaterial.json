@@ -1,0 +1,9 @@
+﻿{
+  "id": "uuid-string",
+  "course_id": "uuid-string",
+  "title": "הרצאה 1 - ארכיטקטורת מערכות",
+  "material_type": "presentation | document | video_link | erd_diagram",
+  "file_url": "https://supabase-storage-url/lecture1.pdf",
+  "uploaded_by": "uuid-of-lecturer",
+  "uploaded_at": "2026-11-25T10:30:00Z"
+}

@@ -1,0 +1,12 @@
+﻿{
+  "id": "uuid-string",
+  "assignment_id": "uuid-string",
+  "course_id": "uuid-string",
+  "student_id": "uuid-of-student",
+  "file_url": "https://supabase-storage-url/student_erd.pdf",
+  "student_notes": "הערות הסטודנט בעת ההגשה",
+  "submitted_at": "2026-12-04T18:20:00Z",
+  "status": "submitted | graded | late",
+  "grade": null,
+  "ai_feedback_id": null
+}
