@@ -9,7 +9,7 @@ async def generate_response(message: str) -> str:
     client = genai.Client(api_key=api_key)
 
     response = await client.aio.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         contents=message
     )
 
