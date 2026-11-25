@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.ai import router as ai_router
-
 app = FastAPI(title="LEV Smart API")
 
 app.add_middleware(
@@ -17,5 +15,5 @@ app.add_middleware(
 def health_check():
     return {"status": "ok", "message": "LEV Smart API is running"}
 
-
+from app.modules.ai_assistant.router import router as ai_router
 app.include_router(ai_router)
