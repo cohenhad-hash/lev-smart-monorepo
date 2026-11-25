@@ -14,3 +14,7 @@ app.add_middleware(
 @app.get("/health")
 def health_check():
     return {"status": "ok", "message": "LEV Smart API is running"}
+
+from app.modules.ai_assistant.router import router as ai_router
+app.include_router(ai_router)
+
