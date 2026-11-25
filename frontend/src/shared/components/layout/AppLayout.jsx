@@ -14,6 +14,12 @@ export default function AppLayout({ children }) {
           <NavLink to="/chat" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>
             <span className="nav-icon">✦</span><span>עוזר AI</span>
           </NavLink>
+          <NavLink to="/assignments/submit-erd" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>
+            <span className="nav-icon">⬆</span><span>הגשת ERD</span>
+          </NavLink>
+          <NavLink to="/courses/create" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>
+            <span className="nav-icon">▤</span><span>קורס חדש</span>
+          </NavLink>
         </nav>
         <div className="topbar-note">סביבת למידה חכמה</div>
       </header>
