@@ -18,3 +18,7 @@ def health_check():
 from app.modules.ai_assistant.router import router as ai_router
 app.include_router(ai_router)
 
+# Register Courses module router (Team 2)
+from app.modules.courses.router import router as courses_router
+app.include_router(courses_router)
+

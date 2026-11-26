@@ -14,49 +14,49 @@ function generateId() {
 }
 
 /**
- * Create a new course using local mock integration.
+ * Create a new course using Backend API.
  * Returns a Promise resolved with the created Course JSON.
- *
- * Schema:
- * {
- *   "id": "uuid-string",
- *   "course_code": "CS101",
- *   "title": "מבוא להנדסת תוכנה",
- *   "description": "תיאור הקורס והדרישות",
- *   "semester": "תשפ\"ז א'",
- *   "lecturer_id": "mock-lecturer-1",
- *   "ta_ids": ["mock-ta-1"],
- *   "syllabus_url": "https://supabase-storage-url/syllabus.pdf",
- *   "created_at": "2026-11-25T10:00:00Z"
- * }
  */
-export function createCourse(courseData) {
-  return new Promise((resolve) => {
-    const id = generateId();
-    const created_at = new Date().toISOString();
+export async function createCourse(courseData) {
+  const baseUrl = (import.meta?.env?.VITE_API_URL) || "http://localhost:8000";
+  const url = `${baseUrl}/api/courses`;
 
-    const course = {
-      id,
-      course_code: courseData.course_code,
-      title: courseData.title,
-      description: courseData.description,
-      semester: courseData.semester,
-      lecturer_id: courseData.lecturer_id,
-      ta_ids: Array.isArray(courseData.ta_ids) ? courseData.ta_ids : [],
-      syllabus_url: courseData.syllabus_url || "",
-      created_at,
-    };
+  const payload = {
+    course_code: courseData.course_code,
+    title: courseData.title,
+    description: courseData.description,
+    semester: courseData.semester,
+    lecturer_id: courseData.lecturer_id,
+    ta_ids: Array.isArray(courseData.ta_ids) ? courseData.ta_ids : [],
+    syllabus_url: courseData.syllabus_url || "",
+  };
 
-    // Save to in-memory list for potential future usage.
-    inMemoryCourses.push(course);
-
-    // Log the created course to the console (as requested).
-    // This mimics a successful backend creation while staying fully local.
-    console.log("[coursesService] קורס נוצר (Mock):", course);
-
-    // Simulate a short network delay for better UX feedback.
-    setTimeout(() => resolve(course), 500);
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
+
+  let data = null;
+  try {
+    data = await response.json();
+  } catch (_) {
+    // ignore JSON parse error; will handle below
+  }
+
+  if (!response.ok) {
+    const errBody = data || {};
+    const msg = errBody.detail || "Failed to create course";
+    throw new Error(msg);
+  }
+
+  // Save created course locally for potential future usage.
+  inMemoryCourses.push(data);
+
+  // Log the created course to the console.
+  console.log("[coursesService] קורס נוצר:", data);
+
+  return data;
 }
 
 // Optional helpers if needed later (kept simple and local).
